@@ -1,15 +1,3 @@
-
-function getPlayerCount() {
-    let playersCount = 0
-    let url = 'rest/players/count'
-    $.ajax({url: url, async: false})
-        .done(function (data) {
-            playersCount = parseInt(data)
-        })
-    return playersCount
-}
-
-
 function generateHead() {
     let head = ''
     for (let key in fieldsColumnsMap) {
@@ -39,16 +27,19 @@ function generateRow(player) {
     $('#accountsListTbody').append(row)
 }
 
-function drawTable(currentPage,playersPerPage){
-$.ajax({
-    url: '/rest/players',
-    dataType: 'json'
-}).done(function (players) {
-    generateHead()
-    for (const player of players) {
-        generateRow(player)
-    }
-})
+function drawTable() {
+    $('#accountsListTbody').html("")
+    $.ajax({
+        url: '/rest/players',
+        data: {
+            pageNumber: parameters.pageNumber,
+            pageSize: parameters.pageSize
+        },
+        dataType: 'json'
+    }).done(function (players) {
+        generateHead()
+        for (const player of players) {
+            generateRow(player)
+        }
+    })
 }
-
-drawTable(playersPerPage,pageNumber)

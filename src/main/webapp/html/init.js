@@ -9,5 +9,11 @@ const fieldsColumnsMap = {
     banned: "Banned"
 }
 
-const playersPerPage = 10
-const pageNumber = 1
+const pageSizes = [3,5,10,20]
+
+const defaultParameters = {
+    pageNumber: 0,
+    pageSize: 5
+}
+
+let parameters = defaultParameters
