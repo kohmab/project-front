@@ -1,14 +1,3 @@
-const fieldsColumnsMap = {
-    id: '#',
-    name: 'Name',
-    title: 'Title',
-    race: 'Race',
-    profession: 'Profession',
-    level: "Level",
-    birthday: "Birthday",
-    banned: "Banned"
-}
-
 
 function getPlayerCount() {
     let playersCount = 0
@@ -50,7 +39,7 @@ function generateRow(player) {
     $('#accountsListTbody').append(row)
 }
 
-
+function drawTable(currentPage,playersPerPage){
 $.ajax({
     url: '/rest/players',
     dataType: 'json'
@@ -60,3 +49,6 @@ $.ajax({
         generateRow(player)
     }
 })
+}
+
+drawTable(playersPerPage,pageNumber)
