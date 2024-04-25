@@ -14,7 +14,13 @@ const columnsActionsMap = {
     "Delete": {action: createDeleteButton}
 }
 
+const selectors={
+    race: ['HUMAN','DWARF','ELF','GIANT','ORC','TROLL','HOBBIT'],
+    profession: ['WARRIOR','ROGUE','SORCERER','CLERIC','PALADIN','NAZGUL','WARLOCK','DRUID']
+}
+
 const pageSizes = [3,5,10,20]
+
 
 const defaultParameters = {
     pageNumber: 0,

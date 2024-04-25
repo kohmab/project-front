@@ -20,12 +20,12 @@ function format(key, value) {
 function generateRow(player) {
     const row = $('<tr>').attr("id", 'tr' + player.id)
     for (let key in fieldsColumnsMap) {
-        const td = $('<td>')
+        const td = $('<td>', {name: key})
             .text(format(key, player[key]))
         row.append(td)
     }
     for (let key in columnsActionsMap) {
-        let td = $('<td>')
+        let td = $('<td>', {name: key})
             .append(columnsActionsMap[key].action(player.id))
         row.append(td)
     }
