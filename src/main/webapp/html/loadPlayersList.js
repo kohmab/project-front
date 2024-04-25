@@ -4,6 +4,10 @@ function generateHead() {
         let th = $('<th>').text(fieldsColumnsMap[key]).attr("scope","col")
         $("#accountListHead").append(th)
     }
+    for (let key in columnsActionsMap){
+        let th = $('<th>').text(key).attr("scope","col")
+        $("#accountListHead").append(th)
+    }
 
 }
 
@@ -14,17 +18,26 @@ function format(key, string) {
 }
 
 function generateRow(player) {
-    let row = '<tr>'
+    const row = $('<tr>').attr("id",'tr'+player.id)
     let isFirstColumn = true
     for (let key in fieldsColumnsMap) {
         if (isFirstColumn) {
-            row += '<th scope="row">' + format(key, player[key]) + '</th>'
+            const th = $('<th>')
+                .attr('scope','row')
+                .text(format(key, player[key]))
+            row.append(th)
             isFirstColumn = false
         } else {
-            row += '<td>' + format(key, player[key]) + '</td>'
+            const td = $('<td>')
+                .text(format(key, player[key]))
+            row.append(td)
         }
     }
-    row += '</tr>'
+    for (let key in columnsActionsMap){
+        let td = $('<td>')
+            .append(columnsActionsMap[key].action(player.id))
+        row.append(td)
+    }
     $('#accountListTbody').append(row)
 }
 

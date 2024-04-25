@@ -6,7 +6,12 @@ const fieldsColumnsMap = {
     profession: 'Profession',
     level: "Level",
     birthday: "Birthday",
-    banned: "Banned"
+    banned: "Banned",
+}
+
+const columnsActionsMap = {
+    "Edit": {action: createEditButton},
+    "Delete": {action: createDeleteButton}
 }
 
 const pageSizes = [3,5,10,20]
