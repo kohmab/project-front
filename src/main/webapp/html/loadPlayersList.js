@@ -1,9 +1,10 @@
 function generateHead() {
-    let head = ''
+    $("#accountListHead").html('')
     for (let key in fieldsColumnsMap) {
-        head += '<th scope="col">' + fieldsColumnsMap[key] + '</th>'
+        let th = $('<th>').text(fieldsColumnsMap[key]).attr("scope","col")
+        $("#accountListHead").append(th)
     }
-    $("#accountListHead").html(head)
+
 }
 
 function format(key, string) {
@@ -24,11 +25,11 @@ function generateRow(player) {
         }
     }
     row += '</tr>'
-    $('#accountsListTbody').append(row)
+    $('#accountListTbody').append(row)
 }
 
 function drawTable() {
-    $('#accountsListTbody').html("")
+    $('#accountListTbody').html("")
     $.ajax({
         url: '/rest/players',
         data: {
