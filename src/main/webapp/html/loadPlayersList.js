@@ -1,39 +1,30 @@
 function generateHead() {
     $("#accountListHead").html('')
     for (let key in fieldsColumnsMap) {
-        let th = $('<th>').text(fieldsColumnsMap[key]).attr("scope","col")
+        let th = $('<th>').text(fieldsColumnsMap[key]).attr("scope", "col")
         $("#accountListHead").append(th)
     }
-    for (let key in columnsActionsMap){
-        let th = $('<th>').text(key).attr("scope","col")
+    for (let key in columnsActionsMap) {
+        let th = $('<th>').text(key).attr("scope", "col")
         $("#accountListHead").append(th)
     }
 
 }
 
-function format(key, string) {
+function format(key, value) {
     if (key === "birthday")
-        return new Date(string).toLocaleDateString()
-    return string
+        return new Date(value).toLocaleDateString()
+    return value
 }
 
 function generateRow(player) {
-    const row = $('<tr>').attr("id",'tr'+player.id)
-    let isFirstColumn = true
+    const row = $('<tr>').attr("id", 'tr' + player.id)
     for (let key in fieldsColumnsMap) {
-        if (isFirstColumn) {
-            const th = $('<th>')
-                .attr('scope','row')
-                .text(format(key, player[key]))
-            row.append(th)
-            isFirstColumn = false
-        } else {
-            const td = $('<td>')
-                .text(format(key, player[key]))
-            row.append(td)
-        }
+        const td = $('<td>')
+            .text(format(key, player[key]))
+        row.append(td)
     }
-    for (let key in columnsActionsMap){
+    for (let key in columnsActionsMap) {
         let td = $('<td>')
             .append(columnsActionsMap[key].action(player.id))
         row.append(td)
