@@ -126,8 +126,7 @@ function showSaveDialog(playerId) {
 }
 
 function showNotification(isActionSucceed, text) {
-    const notification = $('<div>', {class: 'alert alert-dismissible'})
-    notification.append('<a href="#" className="close" data-dismiss="alert" aria-label="close">&times;</a>\n')
+    const notification = $('<div>', {class: 'alert alert-dismissible fade show', role: "alert"})
     if (isActionSucceed) {
         notification.addClass('alert-success')
         notification.append('<strong>Success!</strong> ')
@@ -136,5 +135,6 @@ function showNotification(isActionSucceed, text) {
         notification.append('<strong>Error!</strong> ')
     }
     notification.append(text)
+    notification.append('<button type="button" class="close" data-bs-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>')
     $('#notifications').append(notification)
 }
