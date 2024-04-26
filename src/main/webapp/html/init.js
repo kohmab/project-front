@@ -27,17 +27,18 @@ const playerFields = {
         editable: true,
         createInput: createSelectBox,
         getFromInput: getFromSelectBox,
-
     },
     level: {
         columnTitle: "Level",
         editable: false,
-        createInput: undefined
+        createInput: createTextBox,
+        getFromInput: getFromTextBox
     },
     birthday: {
         columnTitle: "Birthday",
         editable: false,
-        createInput: undefined
+        createInput: createDateBox,
+        getFromInput: getFromDateBox
     },
     banned: {
         columnTitle: "Banned",

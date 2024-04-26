@@ -3,4 +3,4 @@ function update(){
     drawTable()
 }
 
-$('document').ready(update)
+$('document').ready(createInputsNewPlayer).ready(update)

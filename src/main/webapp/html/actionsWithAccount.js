@@ -13,8 +13,45 @@ function createInputsUpdate(playerId) {
     })
 }
 
+function createInputsNewPlayer(){
+    for (let name in playerFields){
+        if (playerFields[name].createInput != null){
+            const title = playerFields[name].columnTitle
+            const method = playerFields[name].createInput
+            $('#newPlayerDialogInputs').append(createNamedInput(name,title,method))
+        }
+    }
+    $('#newPlayerDialogButton').off('click').click(() => newPlayer())
+}
+
+
 function disableAllActionButtons() {
     $('[name="actionButton"]').prop("disabled", true);
+}
+
+function newPlayer(){
+    let playerData = {}
+    for (let name in playerFields){
+        if (playerFields[name].createInput != null){
+            playerData[name] = playerFields[name].getFromInput($('#newPlayer_'+name))
+        }
+    }
+    $.ajax({
+            url: '/rest/players/',
+            type: 'POST',
+            dataType: 'json',
+            contentType: 'application/json;charset=UTF-8',
+            async: false,
+            data: JSON.stringify(playerData),
+            success: function () {
+                showNotification(true, 'New player created.')
+                update()
+            },
+            error: function (response) {
+                showNotification(false, 'Failed create new player. Status code is ' + response.status)
+            }
+        }
+    )
 }
 
 function updatePlayer(playerId) {

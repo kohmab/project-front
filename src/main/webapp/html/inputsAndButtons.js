@@ -54,8 +54,17 @@ function createCheckBox(name, currValue) {
     return $('<input>', {
         type: 'checkbox',
         name: name,
-        class: 'form-check-input'
+        class: 'form-control'
     }).prop('checked', currValue === 'true')
+}
+
+
+function createDateBox(name, currValue) {
+    return $('<input>', {
+        type: 'date',
+        name: name,
+        class: 'form-control'
+    })
 }
 
 
@@ -70,6 +79,21 @@ function getFromSelectBox(cell) {
 function getFromCheckBox(cell) {
     return cell.find('input').prop('checked')
 }
+
+function getFromDateBox(cell) {
+    const dateString = cell.find('input').val()
+    return new Date(dateString).getTime()
+}
+
+function createNamedInput(name, title, createInput) {
+    const row = $('<div>', {class: "mb-3 row"})
+    const label = $('<label>', {class: "col-sm-2 col-form-label"}).html(title)
+    const inputDiv = $('<div>', {class: 'col-sm-10', id: 'newPlayer_' + name}).append(createInput(name, ''))
+    row.append(label)
+    row.append(inputDiv)
+    return row
+}
+
 
 function showConfirmDialog(playerId, title, text, confirmButtonText, action) {
     $('#confirmDialogTitle').html(title)
@@ -104,7 +128,7 @@ function showSaveDialog(playerId) {
 function showNotification(isActionSucceed, text) {
     const notification = $('<div>', {class: 'alert alert-dismissible'})
     notification.append('<a href="#" className="close" data-dismiss="alert" aria-label="close">&times;</a>\n')
-    if (isActionSucceed){
+    if (isActionSucceed) {
         notification.addClass('alert-success')
         notification.append('<strong>Success!</strong> ')
     } else {
