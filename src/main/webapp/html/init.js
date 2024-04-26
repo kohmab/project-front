@@ -1,25 +1,63 @@
-const fieldsColumnsMap = {
-    id: '#',
-    name: 'Name',
-    title: 'Title',
-    race: 'Race',
-    profession: 'Profession',
-    level: "Level",
-    birthday: "Birthday",
-    banned: "Banned",
+const playerFields = {
+    id: {
+        columnTitle: '#',
+        editable: false,
+        createInput: undefined
+    },
+    name: {
+        columnTitle: 'Name',
+        editable: true,
+        createInput: createTextBox,
+        getFromInput: getFromTextBox,
+    },
+    title: {
+        columnTitle: 'Title',
+        editable: true,
+        createInput: createTextBox,
+        getFromInput: getFromTextBox,
+    },
+    race: {
+        columnTitle: 'Race',
+        editable: true,
+        createInput: createSelectBox,
+        getFromInput: getFromSelectBox,
+    },
+    profession: {
+        columnTitle: 'Profession',
+        editable: true,
+        createInput: createSelectBox,
+        getFromInput: getFromSelectBox,
+
+    },
+    level: {
+        columnTitle: "Level",
+        editable: false,
+        createInput: undefined
+    },
+    birthday: {
+        columnTitle: "Birthday",
+        editable: false,
+        createInput: undefined
+    },
+    banned: {
+        columnTitle: "Banned",
+        editable: true,
+        createInput: createCheckBox,
+        getFromInput: getFromCheckBox,
+    },
 }
 
-const columnsActionsMap = {
-    "Edit": {action: createEditButton},
-    "Delete": {action: createDeleteButton}
+const actions = {
+    "Edit": {createButton: createEditButton},
+    "Delete": {createButton: createDeleteButton}
 }
 
-const selectors={
-    race: ['HUMAN','DWARF','ELF','GIANT','ORC','TROLL','HOBBIT'],
-    profession: ['WARRIOR','ROGUE','SORCERER','CLERIC','PALADIN','NAZGUL','WARLOCK','DRUID']
+const enums = {
+    race: ['HUMAN', 'DWARF', 'ELF', 'GIANT', 'ORC', 'TROLL', 'HOBBIT'],
+    profession: ['WARRIOR', 'ROGUE', 'SORCERER', 'CLERIC', 'PALADIN', 'NAZGUL', 'WARLOCK', 'DRUID']
 }
 
-const pageSizes = [3,5,10,20]
+const pageSizes = [3, 5, 10, 20]
 
 
 const defaultParameters = {
@@ -27,4 +65,4 @@ const defaultParameters = {
     pageSize: 5
 }
 
-let parameters = defaultParameters
+const parameters = defaultParameters

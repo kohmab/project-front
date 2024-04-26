@@ -1,10 +1,10 @@
 function generateHead() {
     $("#accountListHead").html('')
-    for (let key in fieldsColumnsMap) {
-        let th = $('<th>').text(fieldsColumnsMap[key]).attr("scope", "col")
+    for (let key in playerFields) {
+        let th = $('<th>').text(playerFields[key].columnTitle).attr("scope", "col")
         $("#accountListHead").append(th)
     }
-    for (let key in columnsActionsMap) {
+    for (let key in actions) {
         let th = $('<th>').text(key).attr("scope", "col")
         $("#accountListHead").append(th)
     }
@@ -19,14 +19,14 @@ function format(key, value) {
 
 function generateRow(player) {
     const row = $('<tr>').attr("id", 'tr' + player.id)
-    for (let key in fieldsColumnsMap) {
+    for (let key in playerFields) {
         const td = $('<td>', {name: key})
             .text(format(key, player[key]))
         row.append(td)
     }
-    for (let key in columnsActionsMap) {
+    for (let key in actions) {
         let td = $('<td>', {name: key})
-            .append(columnsActionsMap[key].action(player.id))
+            .append(actions[key].createButton(player.id))
         row.append(td)
     }
     $('#accountListTbody').append(row)
