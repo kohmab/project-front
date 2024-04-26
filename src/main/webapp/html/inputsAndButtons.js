@@ -15,11 +15,11 @@ function createEditButton(playerId) {
 }
 
 function createDeleteButton(playerId) {
-    return createButton(playerId, deleteIcon, toggleDeleteDialog)
+    return createButton(playerId, deleteIcon, showDeleteDialog)
 }
 
 function createSaveButton(playerId) {
-    return createButton(playerId, saveIcon, toggleSaveDialog)
+    return createButton(playerId, saveIcon, showSaveDialog)
 }
 
 function createCancelButton(playerId) {
@@ -59,41 +59,58 @@ function createCheckBox(name, currValue) {
 }
 
 
-function getFromTextBox(cell){
+function getFromTextBox(cell) {
     return cell.find('input').val()
 }
 
-function getFromSelectBox(cell){
+function getFromSelectBox(cell) {
     return cell.find('select').val()
 }
 
-function getFromCheckBox(cell){
+function getFromCheckBox(cell) {
     return cell.find('input').prop('checked')
 }
 
-function toggleConfirmDialog(playerId,title,text,confirmButtonText,action){
+function showConfirmDialog(playerId, title, text, confirmButtonText, action) {
     $('#confirmDialogTitle').html(title)
     $('#confirmDialogText').html(text)
     $('#confirmDialogButton')
         .text(confirmButtonText)
         .off('click')
-        .click( () => { action(playerId); update()}
+        .click(() => {
+                action(playerId);
+                update()
+            }
         )
     $('#confirmDialog').modal('show')
 }
 
-function toggleDeleteDialog(playerId){
-    toggleConfirmDialog(playerId,
+function showDeleteDialog(playerId) {
+    showConfirmDialog(playerId,
         'Confirm action',
         'Do you want to delete player with id ' + playerId + '?',
         'Delete',
         deletePlayer)
 }
 
-function toggleSaveDialog(playerId){
-    toggleConfirmDialog(playerId,
+function showSaveDialog(playerId) {
+    showConfirmDialog(playerId,
         'Confirm action',
         'Do you want to change player with id ' + playerId + '?',
         'Update',
         updatePlayer)
+}
+
+function showNotification(isActionSucceed, text) {
+    const notification = $('<div>', {class: 'alert alert-dismissible'})
+    notification.append('<a href="#" className="close" data-dismiss="alert" aria-label="close">&times;</a>\n')
+    if (isActionSucceed){
+        notification.addClass('alert-success')
+        notification.append('<strong>Success!</strong> ')
+    } else {
+        notification.addClass('alert-danger')
+        notification.append('<strong>Error!</strong> ')
+    }
+    notification.append(text)
+    $('#notifications').append(notification)
 }

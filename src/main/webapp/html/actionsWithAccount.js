@@ -32,7 +32,13 @@ function updatePlayer(playerId) {
             dataType: 'json',
             contentType: 'application/json;charset=UTF-8',
             async: false,
-            data: JSON.stringify(playerData)
+            data: JSON.stringify(playerData),
+            success: function () {
+                showNotification(true, 'Information about the player with id = ' + playerId + ' has been updated.')
+            },
+            error: function (response) {
+                showNotification(false, 'Failed to update information about player with id = ' + playerId + '. Status code is ' + response.status)
+            }
         }
     )
 }
@@ -40,7 +46,15 @@ function updatePlayer(playerId) {
 function deletePlayer(playerId) {
     $.ajax({
             url: '/rest/players/' + playerId,
-            type: 'DELETE'
+            type: 'DELETE',
+            success: function () {
+                showNotification(true, 'Player ' + playerId + ' was deleted.')
+            },
+            error: function (response) {
+                showNotification(false, 'Failed to delete player with id = ' + playerId + '. Status code is ' + response.status)
+            }
         }
     )
 }
+
+
